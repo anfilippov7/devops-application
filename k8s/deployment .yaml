@@ -19,7 +19,7 @@ spec:
         app: devops-application
     spec:
       containers:
-        - image: docker.io/aleksander7/application:nginx
+        - image: docker.io/aleksander7/application:v2
           imagePullPolicy: Always
           name: devops-application
       terminationGracePeriodSeconds: 30
