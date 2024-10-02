@@ -19,7 +19,7 @@ spec:
         app: devops-application
     spec:
       containers:
-        - image: docker.io/aleksander7/application:v.2
+        - image: docker.io/aleksander7/template:v1
           imagePullPolicy: Always
           name: devops-application
       terminationGracePeriodSeconds: 30
