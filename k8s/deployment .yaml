@@ -1,45 +1,33 @@
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: devops-application
-  name: devops-application
-  namespace: prod
-spec:
-  replicas: 1
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: devops-application
-  template:
-    metadata:
-      labels:
-        app: devops-application
-    spec:
-      containers:
-        - image: docker.io/aleksander7/djangoapp:v1
-          imagePullPolicy: Always
-          name: devops-application
-          ports:
-          - containerPort: 8000
-            name: http
-      terminationGracePeriodSeconds: 30
-
+apiVersion : v1
+kind : Service
+metadata :
+  name : djangohelloworld
+spec :
+  selector :
+    app : djangohelloworld
+  type : LoadBalancer
+  ports :
+    - port : 8000
+      targetPort : 8000
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: devops-application-svc
-  namespace: prod
-spec:
-  ports:
-    - name: http-web
-      nodePort: 30080
-      port: 8000
-      protocol: TCP
-      targetPort: 8000
-  selector:
-    app: devops-application
-  type: LoadBalancer
+apiVersion : apps/v1
+kind : Deployment
+metadata :
+  name : djangohelloworld
+spec :
+  replicas : 1
+  selector :
+    matchLabels :
+      app : djangohelloworld
+  template :
+    metadata :
+      labels :
+        app : djangohelloworld
+    spec :
+      containers :
+      - name : djangohelloworld
+        image: docker.io/aleksander7/djangoapp:v1
+        ports :
+          - containerPort : 8000
+        imagePullPolicy : Always
