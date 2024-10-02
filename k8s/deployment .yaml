@@ -22,6 +22,9 @@ spec:
         - image: docker.io/aleksander7/djangoapp:v1
           imagePullPolicy: Always
           name: devops-application
+          ports:
+          - containerPort: 8000
+            name: http
       terminationGracePeriodSeconds: 30
 
 ---
