@@ -37,9 +37,9 @@ spec:
   ports:
     - name: http-web
       nodePort: 30080
-      port: 80
+      port: 8000
       protocol: TCP
-      targetPort: 80
+      targetPort: 8000
   selector:
     app: devops-application
   type: LoadBalancer
