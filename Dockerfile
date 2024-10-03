@@ -1,9 +1,19 @@
-FROM nginx:1.21.6-alpine
+FROM python:3.10.1
+WORKDIR /app/
+COPY ./stocks_products .
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Configuration
-ADD conf /etc/nginx
-# Content
-ADD content /var/www/html/
+RUN python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 
-RUN chown -R nginx:nginx /var/www &&\
-    chmod -R 644 /var/www/html/*
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+RUN python3 manage.py migrate
+EXPOSE 8000
+
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+
+
