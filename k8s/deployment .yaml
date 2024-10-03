@@ -27,7 +27,7 @@ spec :
     spec :
       containers :
       - name : djangohelloworld
-        image: docker.io/aleksander7/djangoapp:v1
+        image: docker.io/aleksander7/crud:v1.1
         ports :
           - containerPort : 8000
         imagePullPolicy : Always
